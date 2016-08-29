@@ -26,7 +26,6 @@ module Shoppe
     validates :address1, presence: true
     validates :address3, presence: true
     validates :address4, presence: true
-    validates :postcode, presence: true
     validates :country, presence: true
 
     # All addresses ordered by their id asending

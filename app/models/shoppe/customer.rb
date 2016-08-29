@@ -1,7 +1,7 @@
 module Shoppe
   class Customer < ActiveRecord::Base
     EMAIL_REGEX = /\A\b[A-Z0-9\.\_\%\-\+]+@(?:[A-Z0-9\-]+\.)+[A-Z]{2,6}\b\z/i
-    PHONE_REGEX = /\A[+?\d\ \-x\(\)]{7,}\z/
+    PHONE_REGEX = /(?:\+?(\d{1,3}))?[-. (]*(\d{1,3})?[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?/
 
     self.table_name = 'shoppe_customers'
 

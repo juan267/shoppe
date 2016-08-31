@@ -305,7 +305,7 @@ pt-BR:
       order_accepted: Pedido Aceitado
       order_balance: Balanço do Pedido
       order_items: Itens do Pedido
-      order_no_html: "Pedido <b>#%{order_number}</b>"
+      order_no_html: "Pedido <b>#%{order_number}</b>"
       order_number: Número do Pedido
       order_received: Pedido Recebido
       order_rejected: Pedido Rejeitado

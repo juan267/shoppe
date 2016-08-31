@@ -313,7 +313,7 @@ pl:
       order_accepted: Zamówienie zaakceptowane
       order_balance: Bilans zamówienia
       order_items: Pozycje zamówienia
-      order_no_html: Zamówienie <b>#%{order_number}</b>
+      order_no_html: Zamówienie <b>#%{order_number}</b>
       order_number: Numer zamówienia
       order_received: Zamówienie odebrane
       order_rejected: Zamówienie odrzucone

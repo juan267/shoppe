@@ -312,7 +312,7 @@ de:
       order_accepted: Bestellung akzeptiert
       order_balance: Rechnungsbetrag
       order_items: Bestellte Artikel
-      order_no_html: "Bestellung <b>#%{order_number}</b>"
+      order_no_html: "Bestellung <b>#%{order_number}</b>"
       order_number: Nummer der Bestellung
       order_received: Bestellung erhalten
       order_rejected: Bestellung abgelehnt

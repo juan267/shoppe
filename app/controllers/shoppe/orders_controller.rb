@@ -99,6 +99,10 @@ module Shoppe
       render layout: 'shoppe/printable'
     end
 
+    def shipping_labels
+      render layout: 'shoppe/printable'
+    end
+
     private
 
     def safe_params

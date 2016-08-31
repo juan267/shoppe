@@ -1,0 +1,8 @@
+- @order.total_items.times do
+  .shipping-labels
+    .address
+      %p.name= @order.delivery_name
+      %p= "Ciudad: #{@order.delivery_address3}"
+      %p= "Direccion: #{@order.delivery_address1}"
+      %p= "Departamento: #{@order.delivery_address4}"
+      .pagebreak

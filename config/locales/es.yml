@@ -424,8 +424,11 @@ es:
         on_date: "el %{on}"
         tracking_url:  Tracking URL
 
+      shipping_label:
+        shipping_label: Imprimir Datos Envio
+
       despatch_note:
-        despatch_note: Nota de pedido
+        despatch_note: Imprimir Resumen de pedido
         footer: ¡Gracias por su pedido!
         order_number: Número de pedido
         order_placed: Su pedido ha sido recibido

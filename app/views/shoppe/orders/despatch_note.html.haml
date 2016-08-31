@@ -6,12 +6,9 @@
     %h2= t("shoppe.orders.despatch_note.despatch_note")
   .address
     %p.name= @order.delivery_name
-    %p= @order.delivery_address1
-    %p= @order.delivery_address2
-    %p= @order.delivery_address3
-    %p= @order.delivery_address4
-    %p= @order.delivery_postcode
-    %p= @order.delivery_country.try(:name)
+    %p= "Ciudad: #{@order.delivery_address3}"
+    %p= "Direccion: #{@order.delivery_address1}"
+    %p= "Departamento: #{@order.delivery_address4}"
 
   %table.details
     %tr
@@ -41,5 +38,3 @@
           %td= item.ordered_item.sku
           %td= number_to_weight item.weight
           %td.check
-
-  %p.footer= t('shoppe.orders.despatch_note.footer', :default => "Thank you for your order!")

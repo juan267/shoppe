@@ -17,7 +17,8 @@ namespace :shoppe do
 
   desc 'Import default set of countries'
   task import_countries: :environment do
-    Shoppe::CountryImporter.import
+    Shoppe::Country.create(name: 'CO', code2: 'COL', code3: 'Colombia', continent: 'SA', tld: 'co', currency: 'COP')
+    # Shoppe::CountryImporter.import
   end
 
   desc 'Run the key setup tasks for a new application'

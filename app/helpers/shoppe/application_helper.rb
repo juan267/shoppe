@@ -54,5 +54,24 @@ module Shoppe
         text_field_tag "settings[#{field}]", value, options.merge(placeholder: default, class: 'text')
       end
     end
+
+    def page_entries_info(collection, options = {})
+      collection_name = options[:collection_name] || (collection.empty?? 'entry' : collection.first.class.name.underscore.sub('_', ' '))
+
+      if collection.num_pages < 2
+        case collection.size
+        when 0; info = "No #{collection_name.pluralize} found"
+        when 1; info = "Displaying <strong>1</strong> #{collection_name}"
+        else;   info = "Displaying <strong>all #{collection.size}</strong> #{collection_name.pluralize}"
+        end
+      else
+        info = %{Displaying #{collection_name.pluralize} <strong>%d&ndash;%d</strong> of <strong>%d</strong> in total}% [
+          collection.offset_value + 1,
+          collection.offset_value + collection.length,
+          collection.total_count
+        ]
+      end
+      info.html_safe
+    end
   end
 end

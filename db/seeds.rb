@@ -170,6 +170,7 @@ def get_file(name, content_type = 'image/jpeg')
   file
 end
 
+
 lorem = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
          ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -178,28 +179,43 @@ lorem = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
          culpa qui officia deserunt mollit anim id est laborum.'
 
-pro = Shoppe::Product.new(name: 'Valencia 20k', sku: 'V-20k', description: lorem, short_description: 'muy ricas', weight: 20, price: 20000, cost_price: 0, tax_rate: tax_rate, featured: true)
+
+#Salustiana
+pro = Shoppe::Product.new(name: 'Salustiana', sku: 'Sl-20k', description: lorem, short_description: 'muy ricas', weight: 20, price: 0, cost_price: 0, tax_rate: tax_rate)
+pro.product_category_ids = cat1.id
+pro.default_image_file = get_file('salustiana.jpg')
+if pro.save
+  pro.stock_level_adjustments.create(description: 'Initial Stock', adjustment: 0)
+  pro.product_attributes.create(key: 'Tamaño', value: 'Media a Grande', position: 1)
+  pro.product_attributes.create(key: 'Semillas', value: 'Pocas', position: 1)
+  pro.product_attributes.create(key: 'Sabor', value: 'Dulce', position: 1)
+  pro.product_attributes.create(key: 'Contenido de Jugo ', value: 'Alto', position: 1)
+  pro.product_attributes.create(key: 'Durabilidad', value: 'Hasta 20 dias en buenas condiciones', position: 1)
+end
+
+
+#Valencia
+pro = Shoppe::Product.new(name: 'Valencia', sku: 'V-20k', description: lorem, short_description: lorem, weight: 20, price: 0, cost_price: 0, tax_rate: tax_rate)
 pro.product_category_ids = cat1.id
 pro.default_image_file = get_file('valencia.jpg')
 if pro.save
-  pro.stock_level_adjustments.create(description: 'Initial Stock', adjustment: 50)
-  pro.product_attributes.create(key: 'Manufacturer', value: 'Yealink', position: 1)
-  pro.product_attributes.create(key: 'Model', value: 'T20P', position: 1)
-  pro.product_attributes.create(key: 'Colour', value: 'Black', position: 1)
-  pro.product_attributes.create(key: 'Lines', value: '3', position: 1)
-  pro.product_attributes.create(key: 'Colour Screen?', value: 'No', position: 1)
-  pro.product_attributes.create(key: 'Power over ethernet?', value: 'Yes', position: 1)
+  pro.stock_level_adjustments.create(description: 'Initial Stock', adjustment: 0)
+  pro.product_attributes.create(key: 'Tamaño', value: 'Media a Grande', position: 1)
+  pro.product_attributes.create(key: 'Semillas', value: 'Pocas', position: 1)
+  pro.product_attributes.create(key: 'Sabor', value: 'Agridulce', position: 1)
+  pro.product_attributes.create(key: 'Contenido de Jugo ', value: 'Alto', position: 1)
+  pro.product_attributes.create(key: 'Durabilidad', value: 'Hasta 20 dias en buenas condiciones', position: 1)
 end
 
-pro = Shoppe::Product.new(name: 'Sweety 20k', sku: 'S-20k', description: lorem, short_description: lorem, weight: 20, price: 40000, cost_price: 0, tax_rate: tax_rate)
+#Sweety
+pro = Shoppe::Product.new(name: 'Sweety', sku: 'SW-20k', description: lorem, short_description: lorem, weight: 20, price: 0, cost_price: 0, tax_rate: tax_rate)
 pro.product_category_ids = cat1.id
 pro.default_image_file = get_file('sweety.jpg')
 if pro.save
-  pro.stock_level_adjustments.create(description: 'Initial Stock', adjustment: 200)
-  pro.product_attributes.create(key: 'Manufacturer', value: 'Yealink', position: 1)
-  pro.product_attributes.create(key: 'Model', value: 'T22P', position: 1)
-  pro.product_attributes.create(key: 'Colour', value: 'Black', position: 1)
-  pro.product_attributes.create(key: 'Lines', value: '4', position: 1)
-  pro.product_attributes.create(key: 'Colour Screen?', value: 'No', position: 1)
-  pro.product_attributes.create(key: 'Power over ethernet?', value: 'Yes', position: 1)
+  pro.stock_level_adjustments.create(description: 'Initial Stock', adjustment: 0)
+  pro.product_attributes.create(key: 'Tamaño', value: 'Medio', position: 1)
+  pro.product_attributes.create(key: 'Semillas', value: 'Medio', position: 1)
+  pro.product_attributes.create(key: 'Sabor', value: 'Dulce', position: 1)
+  pro.product_attributes.create(key: 'Contenido de Jugo ', value: 'Alto', position: 1)
+  pro.product_attributes.create(key: 'Durabilidad', value: 'Hasta 20 dias en buenas condiciones', position: 1)
 end

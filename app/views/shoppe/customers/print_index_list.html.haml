@@ -11,6 +11,7 @@
         %th= 'Direccion'
         %th= 'Telefono'
         %th= 'Correo Electronico'
+        %th= 'Fecha de Subscripción'
     %tbody
     - for custumer in @customers
       %tr
@@ -21,3 +22,4 @@
               %li= address.full_address
         %td= custumer.phone
         %td= custumer.email
+        %td= custumer.created_at.strftime("%B %-d, %Y")

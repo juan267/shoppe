@@ -5,6 +5,9 @@ Shoppe::Engine.routes.draw do
     collection do
       get :print_index_list
     end
+    member do
+      get :print_info
+    end
     post :search, on: :collection
     resources :addresses
   end

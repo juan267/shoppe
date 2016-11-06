@@ -1,6 +1,7 @@
 - @page_title = t('shoppe.customers.customers') + " - #{@customer.name}"
 = content_for :header do
   %p.buttons
+    = link_to 'Imprimir Datos', print_index_list_customers_path, :class => 'button', :rel => 'print'
     = link_to t('shoppe.customers.new_address'), [:new, @customer, :address], class: 'button'
     = link_to t('shoppe.customers.edit'), [:edit, @customer], class: 'button'
   %h2.users= t('shoppe.customers.customers') + "- #{@customer.name}"

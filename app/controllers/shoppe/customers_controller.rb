@@ -49,6 +49,10 @@ module Shoppe
       render layout: 'shoppe/printable'
     end
 
+    def print_info
+      render layout: 'shoppe/printable'
+    end
+
     private
 
     def safe_params

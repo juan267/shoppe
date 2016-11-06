@@ -1,0 +1,8 @@
+.shipping-labels
+  .address
+    %p.name= @customer.full_name
+    - for address in @customer.addresses
+      %p= "Direccion: #{address.full_address}"
+    %p= "Telefono: #{@customer.phone}"
+    %p= "Correo: #{@customer.email}"
+    %p= "Fecha Susbcripcion #{@customer.created_at.strftime("%B %-d, %Y")}"

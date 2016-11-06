@@ -1,0 +1,23 @@
+- @page_title = "Lista de clientes"
+
+.despatchNote
+  %header
+    %h1= Shoppe.settings.store_name
+    %h2= "Lista de clientes"
+  %table.items
+    %thead
+      %tr
+        %th= 'Nombre'
+        %th= 'Direccion'
+        %th= 'Telefono'
+        %th= 'Correo Electronico'
+    %tbody
+    - for custumer in @customers
+      %tr
+        %td= custumer.full_name
+        %td
+          %ul
+            - for address in custumer.addresses
+              %li= address.full_address
+        %td= custumer.phone
+        %td= custumer.email

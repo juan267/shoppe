@@ -44,6 +44,11 @@ module Shoppe
       render action: 'index'
     end
 
+    def print_index_list
+      @customers = Shoppe::Customer.all
+      render layout: 'shoppe/printable'
+    end
+
     private
 
     def safe_params

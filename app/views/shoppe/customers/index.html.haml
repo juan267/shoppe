@@ -3,6 +3,7 @@
 = content_for :header do
   %p.buttons
     = link_to 'Imprimir reporte clientes', print_index_list_customers_path, :class => 'button', :rel => 'print'
+    = link_to 'Exportar reporte clientes CSV', customers_path(format: :csv), :class => 'button', :rel => 'print'
     = link_to t('shoppe.customers.new_customer'), :new_customer, class: 'button green'
     = link_to t('shoppe.customers.search_customer'), '#', class: 'button', rel: 'searchCustomers'
   %h2.users= t('shoppe.customers.customers')

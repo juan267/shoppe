@@ -1,3 +1,4 @@
+require 'csv'
 module Shoppe
   class Customer < ActiveRecord::Base
     EMAIL_REGEX = /\A\b[A-Z0-9\.\_\%\-\+]+@(?:[A-Z0-9\-]+\.)+[A-Z]{2,6}\b\z/i
@@ -22,6 +23,27 @@ module Shoppe
     # @return [String]
     def name
       company.blank? ? full_name : "#{company} (#{full_name})"
+    end
+
+    def self.to_csv
+      titulos = %w{Nombre Direccion Telefono Email Fecha-Subscripcion }
+      attributes = %w{full_name addresses phone email created_at}
+
+      CSV.generate(headers: true) do |csv|
+        csv << titulos
+        all.each do |user|
+          csv << attributes.map do |attr|
+           if attr == 'addresses'
+             user.addresses.to_a.first.full_address
+           elsif attr == 'created_at'
+             user.created_at.strftime("%B %-d, %Y")
+           else
+             user.send(attr)
+           end
+          end
+        end
+      end
+
     end
 
     # The full name of the customer created by concatinting the first & last name

@@ -6,6 +6,10 @@ module Shoppe
     def index
       @query = Shoppe::Customer.ordered.page(params[:page]).search(params[:q])
       @customers = @query.result
+      respond_to do |format|
+        format.html
+        format.csv { send_data Shoppe::Customer.to_csv, filename: "Clientes-TuNaranja-#{Date.today}.csv" }
+      end
     end
 
     def new

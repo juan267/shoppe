@@ -5,10 +5,16 @@ module Shoppe
 
     def index
       @query = Shoppe::Customer.ordered.page(params[:page]).search(params[:q])
-      @customers = @query.result
+      if params['from_date'].present?
+        from_date = Date.parse(params['from_date'])
+        to_date = Date.parse(params['to_date'])
+        @customers = Shoppe::Customer.created_between(from_date.beginning_of_day, to_date.end_of_day)
+      else
+        @customers = @query.result
+      end
       respond_to do |format|
-        format.html
-        format.csv { send_data Shoppe::Customer.to_csv, filename: "Clientes-TuNaranja-#{Date.today}.csv" }
+        format.html {render 'index'}
+        format.csv { send_data @customers.to_csv, filename: "Clientes-TuNaranja-#{Date.today}.csv" }
       end
     end
 
@@ -45,11 +51,12 @@ module Shoppe
 
     def search
       index
-      render action: 'index'
     end
 
     def print_index_list
-      @customers = Shoppe::Customer.all
+      from_date = Date.parse(params['from_date'])
+      to_date = Date.parse(params['to_date'])
+      @customers = Shoppe::Customer.created_between(from_date.beginning_of_day, to_date.end_of_day)
       render layout: 'shoppe/printable'
     end
 

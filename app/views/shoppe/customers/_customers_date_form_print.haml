@@ -1,0 +1,10 @@
+.printCustomers
+  %h2= 'Imprimir Clientes'
+  = form_tag print_index_list_customers_path, method: 'GET', target: "_blank" do
+    %dl.left
+      %dt= label :from_date, 'Desde'
+      %dd= date_field_tag :from_date
+    %dl.right
+      %dt= label :to_date, 'Hasta'
+      %dd= date_field_tag :to_date, Time.now.strftime('%Y-%m-%d')
+      %dd= submit_tag 'Imprimir', class: 'button green button'

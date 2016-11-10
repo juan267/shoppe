@@ -4,11 +4,11 @@ Shoppe::Engine.routes.draw do
   resources :customers do
     collection do
       get :print_index_list
+      post :search
     end
     member do
       get :print_info
     end
-    post :search, on: :collection
     resources :addresses
   end
 

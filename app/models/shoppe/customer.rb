@@ -16,6 +16,7 @@ module Shoppe
 
     # All customers ordered by their ID desending
     scope :ordered, -> { order(id: :desc) }
+    scope :created_between, lambda {|start_date, end_date| where("created_at >= ? AND created_at <= ?", start_date, end_date )}
 
     # The name of the customer in the format of "Company (First Last)" or if they don't have
     # company specified, just "First Last".

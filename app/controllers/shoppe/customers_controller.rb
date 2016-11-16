@@ -4,12 +4,12 @@ module Shoppe
     before_filter { params[:id] && @customer = Shoppe::Customer.find(params[:id]) }
 
     def index
-      @query = Shoppe::Customer.ordered.page(params[:page]).search(params[:q])
       if params['from_date'].present?
         from_date = Date.parse(params['from_date'])
         to_date = Date.parse(params['to_date'])
         @customers = Shoppe::Customer.created_between(from_date.beginning_of_day, to_date.end_of_day)
       else
+        @query = Shoppe::Customer.ordered.page(params[:page]).search(params[:q])
         @customers = @query.result
       end
       respond_to do |format|

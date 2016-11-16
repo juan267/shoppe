@@ -25,6 +25,7 @@ Shoppe::Engine.routes.draw do
   end
   resources :orders do
     collection do
+      get :print_index_list
       post :search
     end
     member do

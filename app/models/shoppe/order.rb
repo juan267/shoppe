@@ -1,3 +1,4 @@
+require 'csv'
 module Shoppe
   class Order < ActiveRecord::Base
     EMAIL_REGEX = /\A\b[A-Z0-9\.\_\%\-\+]+@(?:[A-Z0-9\-]+\.)+[A-Z]{2,6}\b\z/i
@@ -31,6 +32,8 @@ module Shoppe
       order.validates :email_address, format: { with: EMAIL_REGEX }
       order.validates :phone_number, format: { with: PHONE_REGEX }
     end
+
+    scope :created_between, lambda {|start_date, end_date| where("created_at >= ? AND created_at <= ?", start_date, end_date )}
 
     # Set some defaults
     before_validation { self.token = SecureRandom.uuid  if token.blank? }
@@ -67,6 +70,30 @@ module Shoppe
     # @return [String]
     def full_name
       "#{first_name} #{last_name}"
+    end
+
+    def self.to_csv
+      titulos = %w{Numero Cliente Estado Productos Valor-Total Fecha}
+      attributes = %w{number customer_name status order_items  total created_at}
+
+      CSV.generate(headers: true) do |csv|
+        csv << titulos
+        all.each do |order|
+          csv << attributes.map do |attr|
+           if attr == 'order_items'
+             result = order.order_items.map do |item|
+               [item.quantity, item.ordered_item.full_name].join(' ')
+             end
+             p result
+             result.join(' ')
+           elsif attr == 'created_at'
+             order.created_at.strftime("%B %-d, %Y")
+           else
+             order.send(attr)
+           end
+          end
+        end
+      end
     end
 
     # Is this order empty? (i.e. doesn't have any items associated with it)

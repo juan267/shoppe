@@ -12,7 +12,12 @@ $ ->
 
   # When clicking the order search button, toggle the form
   $('a[rel=searchOrders]').on 'click', ->
-    $('div.orderSearch').toggle()
+    $('div.printOrdersCSV').hide()
+    $('div.orderSearch').show()
+
+  $('a[rel=printOrdersCSV]').on 'click', ->
+    $('div.orderSearch').hide()
+    $('div.printOrdersCSV').show()
 
   # When clicking the print customers, toggle the form
   $('a[rel=printCustomersCSV]').on 'click', ->

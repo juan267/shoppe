@@ -44,7 +44,6 @@ module Shoppe
           end
         end
       end
-
     end
 
     # The full name of the customer created by concatinting the first & last name

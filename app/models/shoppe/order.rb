@@ -74,7 +74,7 @@ module Shoppe
 
     def self.to_csv
       titulos = %w{Numero Cliente Estado Productos Valor-Total Fecha}
-      attributes = %w{number customer_name status order_items  total created_at}
+      attributes = %w{number customer_name status order_items  total received_at}
 
       CSV.generate(headers: true) do |csv|
         csv << titulos
@@ -85,8 +85,8 @@ module Shoppe
                [item.quantity, item.ordered_item.full_name].join(' ')
              end
              result.join(' ')
-           elsif attr == 'created_at'
-             order.created_at.strftime("%B %-d, %Y")
+           elsif attr == 'received_at'
+             order.received_at.strftime("%B %-d, %Y")
            else
              order.send(attr)
            end

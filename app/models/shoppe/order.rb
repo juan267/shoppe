@@ -33,7 +33,7 @@ module Shoppe
       order.validates :phone_number, format: { with: PHONE_REGEX }
     end
 
-    scope :created_between, lambda {|start_date, end_date| where("created_at >= ? AND created_at <= ?", start_date, end_date )}
+    scope :created_between, lambda {|start_date, end_date| where("received_at >= ? AND received_at <= ?", start_date, end_date )}
 
     # Set some defaults
     before_validation { self.token = SecureRandom.uuid  if token.blank? }
@@ -84,7 +84,6 @@ module Shoppe
              result = order.order_items.map do |item|
                [item.quantity, item.ordered_item.full_name].join(' ')
              end
-             p result
              result.join(' ')
            elsif attr == 'created_at'
              order.created_at.strftime("%B %-d, %Y")

@@ -1,5 +1,5 @@
 .printOrdersCSV
-  %h2= 'Exportar Ordenes CSV'
+  %h2= 'Exportar Pedidos CSV'
   = form_tag orders_path(format: :csv), method: 'GET' do
     %dl.left
       %dt= label :from_date, 'Desde'
@@ -7,4 +7,4 @@
     %dl.right
       %dt= label :to_date, 'Hasta'
       %dd= date_field_tag :to_date, Time.now.strftime('%Y-%m-%d')
-      %dd= submit_tag 'Imprimir', class: 'button green button'
+      %dd= submit_tag 'Exportar', class: 'button green button'

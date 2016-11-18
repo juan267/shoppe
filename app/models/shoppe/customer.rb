@@ -35,7 +35,7 @@ module Shoppe
         all.each do |user|
           csv << attributes.map do |attr|
            if attr == 'addresses'
-             user.addresses.to_a.first.full_address
+             user.addresses.to_a.first.try(:full_address)
            elsif attr == 'created_at'
              user.created_at.strftime("%B %-d, %Y")
            else

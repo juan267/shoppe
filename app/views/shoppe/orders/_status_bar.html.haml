@@ -30,6 +30,7 @@
           = t('shoppe.orders.status_bar.on_date', on: @order.shipped_at.to_s(:short))
           = t('shoppe.orders.status_bar.by_user', user: @order.shipper.try(:short_name) || 'Unknown')
         - if @order.delivery_service && @order.courier_tracking_url
-          %p= link_to t('shoppe.orders.status_bar.tracking_url'), @order.courier_tracking_url
+          %p= 'Guia de envio ' + @order.consignment_number
+          / %p= link_to t('shoppe.orders.status_bar.tracking_url'), @order.courier_tracking_url
         - else
           %p= t('shoppe.orders.status_bar.consignment_no_html', consignment_number: @order.consignment_number)

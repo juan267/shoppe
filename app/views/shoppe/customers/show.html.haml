@@ -12,6 +12,8 @@
       %dl
         %dt= t('shoppe.customers.name')
         %dd= @customer.full_name
+        %dt= t('Fecha de Inscripcion')
+        %dd= time_tag @customer.created_at
         %dt= t('shoppe.customers.company')
         %dd= @customer.company.blank? ? '-' : @customer.company
     .right

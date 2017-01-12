@@ -468,6 +468,9 @@ header.main {
 		p.submit {
 			float:right;
 		}
+		#q_received_at_gteq, #q_received_at_lteq {
+			width: 65%;
+		}
 	}
 
 	//

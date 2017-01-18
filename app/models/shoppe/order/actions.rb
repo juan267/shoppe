@@ -37,6 +37,8 @@ module Shoppe
         # order as 'received' which means it can be accepted by staff.
         self.status = 'received'
         self.received_at = Time.now
+        self.accepted_at = nil
+        self.rejected_at = nil
         save!
 
         order_items.each(&:confirm!)

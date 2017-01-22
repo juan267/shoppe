@@ -22,6 +22,9 @@ module Shoppe
     # All orders which have been received
     scope :received, -> { where('received_at is not null') }
 
+    # All orders which are being built or confirming
+    scope :building, -> { where('received_at is null') }
+
     # All orders which are currently pending acceptance/rejection
     scope :pending, -> { where(status: 'received') }
 

@@ -41,6 +41,21 @@ module Shoppe
     # Some methods for setting the billing & delivery addresses
     attr_accessor :save_addresses, :billing_address_id, :delivery_address_id
 
+    def self.recover_order(params)
+      p 'Inside her'
+      p params.to_yaml
+      email = params[:email_buyer] || params[:buyerEmail]
+      customer = Shoppe::Customer.includes(:addresses).find_by(email: email)
+      address = customer.addresses.first
+      order = customer.orders.create(first_name: customer.first_name, last_name: customer.last_name, billing_address1: address.address1, billing_address3: address.address3, billing_address4: address.address4, billing_postcode: "xxxx", email_address: customer.email, phone_number: customer.phone, billing_country: Shoppe::Country.find(1))
+      products = JSON.parse(params[:extra1])
+      products.each do |product|
+        order.order_items.add_item(Shoppe::Product.find(product["id"].to_i), product["q"].to_i)
+      end
+      logger.info "Recovering Order with id #{params[:reference_sale] || params[:referenceCode]}"
+      order
+    end
+
     # The order number
     #
     # @return [String] - the order number padded with at least 5 zeros
@@ -114,6 +129,12 @@ module Shoppe
     # @return [Integer]
     def total_items
       order_items.inject(0) { |t, i| t + i.quantity }
+    end
+
+    def items_and_quantities
+      order_items.map do |item|
+        {id: item.ordered_item.id, q:item.quantity}
+      end
     end
 
     def self.ransackable_attributes(_auth_object = nil)

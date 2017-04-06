@@ -42,8 +42,6 @@ module Shoppe
     attr_accessor :save_addresses, :billing_address_id, :delivery_address_id
 
     def self.recover_order(params)
-      p 'Inside her'
-      p params.to_yaml
       email = params[:email_buyer] || params[:buyerEmail]
       customer = Shoppe::Customer.includes(:addresses).find_by(email: email)
       address = customer.addresses.first

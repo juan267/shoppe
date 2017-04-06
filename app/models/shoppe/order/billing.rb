@@ -72,6 +72,10 @@ module Shoppe
         order_items.inject(BigDecimal(0)) { |t, i| t + i.total }
     end
 
+    def total_with_discount(discount)
+      (total - discount).to_i
+    end
+
     # The total amount due on the order
     #
     # @return [BigDecimal]

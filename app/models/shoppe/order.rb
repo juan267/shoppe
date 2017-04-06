@@ -129,6 +129,7 @@ module Shoppe
       order_items.inject(0) { |t, i| t + i.quantity }
     end
 
+
     def items_and_quantities
       order_items.map do |item|
         {id: item.ordered_item.id, q:item.quantity}

@@ -69,11 +69,19 @@ module Shoppe
     def total
       delivery_price +
         delivery_tax_amount +
-        order_items.inject(BigDecimal(0)) { |t, i| t + i.total }
+        order_items.inject(BigDecimal(0)) do |t, i|
+          if i.free
+            t
+          else
+            t + i.total
+          end
+        end
     end
 
-    def total_with_discount(discount)
-      (total - discount).to_i
+    def mark_free_items(free_items_amount)
+      free_items_amount.times do |i|
+        order_items[i].free = true
+      end
     end
 
     # The total amount due on the order

@@ -1,6 +1,7 @@
 module Shoppe
   class OrderItem < ActiveRecord::Base
     self.table_name = 'shoppe_order_items'
+    attr_accessor :free
 
     # The associated order
     #

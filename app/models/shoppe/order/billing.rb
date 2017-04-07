@@ -69,18 +69,31 @@ module Shoppe
     def total
       delivery_price +
         delivery_tax_amount +
-        order_items.inject(BigDecimal(0)) do |t, i|
-          if i.free
-            t
-          else
-            t + i.total
-          end
-        end
+        order_items.inject(BigDecimal(0)) {|t, i| t + i.total }
     end
 
     def mark_free_items(free_items_amount)
-      free_items_amount.times do |i|
-        order_items[i].free = true
+      update_order_items_unit_price
+      items = order_items.reload
+      total_items = items.size
+      item = 0
+      while free_items_amount > 0 && total_items > 0
+        operation = free_items_amount <=> items[item].quantity
+        if operation <= 0
+          items[item].discount_items = free_items_amount
+          free_items_amount = 0
+        else
+          items[item].discount_items = items[item].quantity
+          free_items_amount = free_items_amount - items[item].quantity
+          item += 1
+        end
+        total_items -= 1
+      end
+    end
+
+    def update_order_items_unit_price
+      order_items.each do |item|
+        item.update(unit_price: item.ordered_item.try(:price))
       end
     end
 

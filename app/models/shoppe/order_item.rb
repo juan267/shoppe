@@ -1,7 +1,8 @@
 module Shoppe
   class OrderItem < ActiveRecord::Base
     self.table_name = 'shoppe_order_items'
-    attr_accessor :free
+    attr_writer :discount_items
+
 
     # The associated order
     #
@@ -53,6 +54,10 @@ module Shoppe
           new_item
         end
       end
+    end
+
+    def discount_items
+      @discount_items || 0
     end
 
     # Remove a product from an order. It will also ensure that the order's custom delivery
@@ -111,7 +116,7 @@ module Shoppe
     #
     # @return [BigDecimal]
     def unit_price
-      read_attribute(:unit_price) || ordered_item.try(:price) || BigDecimal(0)
+      ordered_item.try(:price) || read_attribute(:unit_price) || BigDecimal(0)
     end
 
     # The cost price for the item
@@ -146,7 +151,7 @@ module Shoppe
     #
     # @return [BigDecimal]
     def sub_total
-      quantity * unit_price
+      (quantity - discount_items) * unit_price
     end
 
     # The total price including tax for the order line

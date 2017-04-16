@@ -76,19 +76,23 @@ module Shoppe
       update_order_items_unit_price
       items = order_items.reload
       total_items = items.size
+      total_free_boxes = 0
       item = 0
       while free_items_amount > 0 && total_items > 0
         operation = free_items_amount <=> items[item].quantity
         if operation <= 0
           items[item].discount_items = free_items_amount
+          total_free_boxes = free_items_amount
           free_items_amount = 0
         else
           items[item].discount_items = items[item].quantity
           free_items_amount = free_items_amount - items[item].quantity
+          total_free_boxes += items[item].quantity
           item += 1
         end
         total_items -= 1
       end
+      total_free_boxes
     end
 
     def update_order_items_unit_price

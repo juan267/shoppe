@@ -50,7 +50,7 @@ module Shoppe
            elsif attr == 'order_count'
              user.order_count
            elsif attr == 'city'
-             address.address3
+             address.try(:address3)
            elsif attr == 'lifetime_value'
              user.lifetime_value
            else

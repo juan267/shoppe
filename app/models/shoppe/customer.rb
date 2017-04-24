@@ -26,18 +26,30 @@ module Shoppe
       company.blank? ? full_name : "#{company} (#{full_name})"
     end
 
+    def lifetime_value
+      orders.ordered.reduce(0) {|accu, order| accu += order.amount_paid.to_i}
+    end
+
+    def order_count
+      orders.completed.count
+    end
+
     def self.to_csv
-      titulos = %w{Nombre Direccion Telefono Email Fecha-Subscripcion }
-      attributes = %w{full_name addresses phone email created_at}
+      headers = %w{name address phone email sign_up_date order_count lifetime_value}
+      attributes = %w{full_name addresses phone email created_at order_count lifetime_value}
 
       CSV.generate(headers: true) do |csv|
-        csv << titulos
+        csv << headers
         all.each do |user|
           csv << attributes.map do |attr|
            if attr == 'addresses'
              user.addresses.to_a.first.try(:full_address)
            elsif attr == 'created_at'
              user.created_at.strftime("%B %-d, %Y")
+           elsif attr == 'order_count'
+             user.order_count
+           elsif attr == 'lifetime_value'
+             user.lifetime_value
            else
              user.send(attr)
            end

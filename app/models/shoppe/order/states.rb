@@ -31,6 +31,9 @@ module Shoppe
     # All ordered ordered by their ID desending
     scope :ordered, -> { order(id: :desc) }
 
+    # All orders which have been completed
+    scope :completed, -> { where(status: %w{received accepted rejected shipped}) }
+
     # Is this order still being built by the user?
     #
     # @return [Boolean]

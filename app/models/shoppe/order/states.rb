@@ -32,7 +32,7 @@ module Shoppe
     scope :ordered, -> { order(id: :desc) }
 
     # All orders which have been completed
-    scope :completed, -> { where(status: %w{received accepted rejected shipped}) }
+    scope :completed, -> { where(status: %w{received accepted shipped}) }
 
     # Is this order still being built by the user?
     #

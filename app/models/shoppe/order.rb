@@ -1,4 +1,4 @@
-require 'csv'
+  require 'csv'
 module Shoppe
   class Order < ActiveRecord::Base
     EMAIL_REGEX = /\A\b[A-Z0-9\.\_\%\-\+]+@(?:[A-Z0-9\-]+\.)+[A-Z]{2,6}\b\z/i

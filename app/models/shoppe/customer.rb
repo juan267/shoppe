@@ -35,8 +35,8 @@ module Shoppe
     end
 
     def self.to_csv
-      headers = %w{name address city phone email sign_up_date order_count lifetime_value}
-      attributes = %w{full_name addresses city phone email created_at order_count lifetime_value}
+      headers = %w{first_name last_name address city phone email sign_up_date order_count lifetime_value}
+      attributes = %w{first_name last_name addresses city phone email created_at order_count lifetime_value}
 
       CSV.generate(headers: true) do |csv|
         csv << headers

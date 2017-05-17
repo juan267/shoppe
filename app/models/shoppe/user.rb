@@ -5,9 +5,11 @@ module Shoppe
     has_secure_password
 
     # Validations
+    before_validation :downcase_email
     validates :first_name, presence: true
     validates :last_name, presence: true
     validates :email_address, presence: true
+
 
     # The user's first name & last name concatenated
     #
@@ -43,5 +45,12 @@ module Shoppe
       return false unless user.authenticate(password)
       user
     end
+
+    private
+
+    def downcase_email
+      self.email = email.downcase if email.present?
+    end
+
   end
 end

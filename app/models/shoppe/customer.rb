@@ -11,6 +11,8 @@ module Shoppe
     has_many :orders, dependent: :restrict_with_exception, class_name: 'Shoppe::Order'
 
     # Validations
+    before_validation :downcase_email
+
     validates :email, presence: true, uniqueness: true, format: { with: EMAIL_REGEX }
     validates :phone, presence: true, format: { with: PHONE_REGEX }
 
@@ -74,6 +76,12 @@ module Shoppe
 
     def self.ransackable_associations(_auth_object = nil)
       []
+    end
+
+    private
+
+    def downcase_email
+      self.email = email.downcase if email.present?
     end
   end
 end

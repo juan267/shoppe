@@ -1,4 +1,4 @@
-  require 'csv'
+require 'csv'
 module Shoppe
   class Order < ActiveRecord::Base
     EMAIL_REGEX = /\A\b[A-Z0-9\.\_\%\-\+]+@(?:[A-Z0-9\-]+\.)+[A-Z]{2,6}\b\z/i
@@ -44,7 +44,7 @@ module Shoppe
 
     def self.recover_order(params)
       email = params[:email_buyer] || params[:buyerEmail]
-      customer = Shoppe::Customer.includes(:addresses).find_by(email: email)
+      customer = Shoppe::Customer.includes(:addresses).find_by(email: email.downcase)
       address = customer.addresses.first
       order = customer.orders.create(first_name: customer.first_name, last_name: customer.last_name, billing_address1: address.address1, billing_address3: address.address3, billing_address4: address.address4, billing_postcode: "xxxx", email_address: customer.email, phone_number: customer.phone, billing_country: Shoppe::Country.find(1))
       products = JSON.parse(params[:extra1])

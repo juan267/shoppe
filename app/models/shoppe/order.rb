@@ -87,8 +87,8 @@ module Shoppe
     end
 
     def self.to_csv
-      titulos = %w{Numero Cliente Estado Productos Valor-Total Fecha Guia}
-      attributes = %w{number customer_name status order_items total received_at consignment_number}
+      titulos = %w{Numero Cliente Correo Estado Productos Valor-Total Fecha Guia}
+      attributes = %w{number customer_name email_address status order_items total received_at consignment_number}
 
       CSV.generate(headers: true) do |csv|
         csv << titulos

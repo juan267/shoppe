@@ -37,8 +37,8 @@ module Shoppe
     end
 
     def self.to_csv
-      headers = %w{first_name last_name address city phone email sign_up_date order_count lifetime_value}
-      attributes = %w{first_name last_name addresses city phone email created_at order_count lifetime_value}
+      headers = %w{first_name last_name address city phone email sign_up_date order_count lifetime_value id}
+      attributes = %w{first_name last_name addresses city phone email created_at order_count lifetime_value id}
 
       CSV.generate(headers: true) do |csv|
         csv << headers
@@ -55,6 +55,8 @@ module Shoppe
              address.try(:address3)
            elsif attr == 'lifetime_value'
              user.lifetime_value
+           elsif attr == 'id'
+             User.find_by(email: user.email).to_param
            else
              user.send(attr)
            end

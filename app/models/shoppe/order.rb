@@ -87,8 +87,8 @@ module Shoppe
     end
 
     def self.to_csv
-      titulos = %w{Numero Cliente Correo Estado Productos Valor-Total Fecha Guia}
-      attributes = %w{number customer_name email_address status order_items total received_at consignment_number}
+      titulos = %w{Numero Cliente Correo Estado Productos Valor-Total Ciudad Mes Fecha Guia}
+      attributes = %w{number customer_name email_address status order_items total city month received_at consignment_number}
 
       CSV.generate(headers: true) do |csv|
         csv << titulos
@@ -101,6 +101,11 @@ module Shoppe
              result.join(' ')
            elsif attr == 'received_at'
              order.received_at.strftime("%B %-d, %Y")
+           elsif attr == 'city'
+             address = order.addresses.to_a.first
+             address.try(:address3)
+           elsif attr == 'month'
+             order.received_at.strftime("%B")
            else
              order.send(attr) ? order.send(attr) : 'Sin asignar'
            end

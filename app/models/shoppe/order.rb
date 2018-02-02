@@ -25,7 +25,7 @@ module Shoppe
 
     # The order can belong to a customer
     belongs_to :customer, class_name: 'Shoppe::Customer'
-    has_many :addresses, through: :customers, class_name: 'Shoppe::Address'
+    has_many :addresses, through: :customer, class_name: 'Shoppe::Address'
 
     # Validations
     validates :token, presence: true
@@ -102,7 +102,7 @@ module Shoppe
            elsif attr == 'received_at'
              order.received_at.strftime("%B %-d, %Y")
            elsif attr == 'city'
-             order.customer.addresses.take.try(:address3)
+             order.addresses.take.try(:address3)
            elsif attr == 'month'
              order.received_at.strftime("%B")
            else

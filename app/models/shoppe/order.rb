@@ -102,8 +102,7 @@ module Shoppe
            elsif attr == 'received_at'
              order.received_at.strftime("%B %-d, %Y")
            elsif attr == 'city'
-             address = order.addresses.to_a.first
-             address.try(:address3)
+             order.customer.addresses.take.try(:address3)
            elsif attr == 'month'
              order.received_at.strftime("%B")
            else

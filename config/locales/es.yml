@@ -340,6 +340,7 @@ es:
       build_time: Tiempo de preparación
       company: Compañía
       consignment_number: Número de envío
+      delivery_provider: Proveedor de envío
       cost: Coste
       country: País
       create_order: Crear pedido

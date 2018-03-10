@@ -213,12 +213,13 @@ module Shoppe
     end
 
     # Mark this order as shipped
-    def ship!(consignment_number, user = nil)
+    def ship!(consignment_number, user = nil, delivery_provider = nil)
       run_callbacks :ship do
         self.shipped_at = Time.now
         self.shipper = user if user
         self.status = 'shipped'
         self.consignment_number = consignment_number
+        self.delivery_provider = delivery_provider
         save!
         Shoppe::OrderMailer.shipped(self).deliver
       end

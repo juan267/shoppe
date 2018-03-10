@@ -45,8 +45,10 @@
     - if @order.accepted? && !@order.shipped?
       = form_tag [:ship, @order] do
         %dl.form
+          %dt.padding= label_tag 'delivery_provider', t('shoppe.orders.delivery_provider')
+          %dd= text_field_tag 'delivery_provider', '', :class => 'text', :required => true
           %dt.padding= label_tag 'consignment_number', t('shoppe.orders.consignment_number')
-          %dd= text_field_tag 'consignment_number', '', :class => 'text'
+          %dd= text_field_tag 'consignment_number', '', :class => 'text', :required => true
         %dl.form
           %dd= submit_tag t('shoppe.orders.mark_as_shipped') , :class => 'button green button-mini'
 

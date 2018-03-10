@@ -101,7 +101,7 @@ module Shoppe
     end
 
     def ship
-      @order.ship!(params[:consignment_number], current_user)
+      @order.ship!(params[:consignment_number], current_user, params[:delivery_provider])
       redirect_to @order, flash: { notice: t('shoppe.orders.ship_notice') }
     end
 

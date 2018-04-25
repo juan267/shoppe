@@ -27,7 +27,6 @@ valencia = 'Esta variedad se identificó y nombró en Portugal, pero es probable
 
 short_description = 'Naranjas de excelente calidad'
 
-
 #Salustiana
 pro = Shoppe::Product.new(name: 'Salustiana', sku: 'Sl-20k', description: salustiana, short_description: short_description, weight: 20, price: 0, cost_price: 0, tax_rate: tax_rate)
 pro.product_category_ids = cat1.id

@@ -49,7 +49,7 @@ module Shoppe
     private
 
     def downcase_email
-      self.email_address = email.downcase if email.present?
+      self.email_address = email_address.downcase if email_address.present?
     end
 
   end

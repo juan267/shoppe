@@ -12,6 +12,10 @@ gemspec
 
 # To use debugger
 # gem 'debugger'
+group :development do
+  gem 'annotate'
+	gem 'faker', '~> 1.8', '>= 1.8.7'
+end
 
 gem 'pg' if ENV['DB'] == 'postgresql'
 

@@ -93,7 +93,7 @@ end
   num = Faker::Number.between(1, 50)
   customer = Shoppe::Customer.find(num)
   address = Faker::Address.street_address
-  
+
   Shoppe::Order.create(first_name: customer.first_name, last_name: customer.last_name, company: customer.company, billing_address1: address, billing_address2: address, billing_address3: address, billing_address4: address, billing_postcode: Faker::Address.zip_code, billing_country_id: 1, email_address: customer.email, phone_number: customer.phone, status: "shipped", received_at: Time.now, accepted_at: Time.now, created_at:Time.now, updated_at: Time.now,delivery_service_id: nil)
 
   Shoppe::Order.last.order_items.add_item(Shoppe::Product.find( Faker::Number.between(1, 3)), Faker::Number.between(1, 4))

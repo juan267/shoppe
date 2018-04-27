@@ -109,8 +109,8 @@ end
     received_at: Time.now,
     accepted_at: Time.now
   )
-  
+
   product = Shoppe::Product.find( Faker::Number.between(1, 3))
   quantity = Faker::Number.between(1, 4)
-  Shoppe::Order.last.order_items.add_item(producto, quantity)
+  Shoppe::Order.last.order_items.add_item(product, quantity)
 end

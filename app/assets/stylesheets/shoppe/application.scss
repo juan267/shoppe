@@ -465,13 +465,14 @@ header.main {
       dl{
         vertical-align: bottom;
         width: 33%;
+        height: 155px;
         display:inline-block;
         input#q_received_at_gteq{
-          width: 45%
+          width: 60%
         }
 
         input#q_received_at_lteq{
-          width: 45%
+          width: 60%
         }
         dt{
           margin-top: 10px;

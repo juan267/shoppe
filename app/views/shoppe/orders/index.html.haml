@@ -20,9 +20,9 @@
         %th Kg sold
     %tbody
       %tr
-        %td #{total_boxes(@orders)} units
-        %td= number_to_currency(total_price(@orders), unit: "$",precision: 1)
-        %td #{total_weight(@orders)} kg
+        %td #{total_boxes(@unpaged_orders)} units
+        %td= number_to_currency(total_price(@unpaged_orders), unit: "$",precision: 1)
+        %td #{total_weight(@unpaged_orders)} kg
 .table
   %table.data
     %thead

@@ -73,5 +73,33 @@ module Shoppe
       end
       info.html_safe
     end
+
+    def total_boxes(orders)
+      boxes = 0
+      orders.size.times do |i|
+        orders[i].order_items.size.times do |j|
+          boxes += orders[i].order_items[j].quantity
+        end
+      end
+      boxes
+    end
+
+    def total_price(orders)
+      price = 0
+      orders.size.times do |i|
+        price += orders[i].total
+      end
+      price
+    end
+
+    def total_weight(orders)
+      weight = 0
+      orders.size.times do |i|
+        orders[i].order_items.size.times do |j|
+          weight += orders[i].order_items[j].weight * orders[i].order_items[j].quantity
+        end
+      end
+      weight
+    end
   end
 end

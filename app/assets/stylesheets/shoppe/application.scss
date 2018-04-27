@@ -455,6 +455,34 @@ header.main {
 	//
 	// order search
 	//
+  div.orderSearch{
+    .search-container{
+      padding: 10px;
+      border-bottom: 1px solid rgb(203, 203, 203);
+      .r{
+        text-align: right;
+      }
+      dl{
+        vertical-align: bottom;
+        width: 33%;
+        display:inline-block;
+        input#q_received_at_gteq{
+          width: 45%
+        }
+
+        input#q_received_at_lteq{
+          width: 45%
+        }
+        dt{
+          margin-top: 10px;
+        }
+      }
+    }
+    dd.submit{
+      text-align: center;
+      margin: 10px;
+    }
+  }
 	div.orderSearch, div.customerSearch, div.printCustomers, div.printCustomersCSV, div.printOrdersCSV {
 		overflow:hidden;
 		display:none;
@@ -562,6 +590,7 @@ input.text, textarea.text {
 // data table
 //
 div.table {
+  margin-bottom: 20px;
 	p.info {
 		overflow:hidden;
 		margin-bottom:10px;

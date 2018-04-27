@@ -134,7 +134,6 @@ module Shoppe
       order_items.inject(0) { |t, i| t + i.quantity }
     end
 
-
     def items_and_quantities
       order_items.map do |item|
         {id: item.ordered_item.id, q:item.quantity}
@@ -146,7 +145,7 @@ module Shoppe
     end
 
     def self.ransackable_associations(_auth_object = nil)
-      []
+      reflect_on_all_associations.map { |a| a.name.to_s }
     end
   end
 end

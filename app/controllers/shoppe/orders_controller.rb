@@ -4,17 +4,12 @@ module Shoppe
     before_filter { params[:id] && @order = Shoppe::Order.find(params[:id]) }
 
     def index
-      if params['from_date'].present?
-        from_date = Date.parse(params['from_date'])
-        to_date = Date.parse(params['to_date'])
-        @orders = Shoppe::Order.ordered.received.includes(order_items: :ordered_item).created_between(from_date.beginning_of_day, to_date.end_of_day)
-      else
-        @query = Shoppe::Order.ordered.received.includes(order_items: :ordered_item).page(params[:page]).search(params[:q])
-        @orders = @query.result
-      end
+      @query = Shoppe::Order.ordered.received.joins(:products).includes(order_items: :ordered_item).page(params[:page]).search(params[:q])
+      @orders = @query.result
+      @unpaged_orders = @orders.except(:limit, :offset)
       respond_to do |format|
         format.html {render 'index'}
-        format.csv { send_data @orders.to_csv, filename: "Pedidos-TuNaranja-#{Date.today}.csv" }
+        format.csv { send_data @unpaged_orders.to_csv, filename: "Pedidos-TuNaranja-#{Date.today}.csv" }
       end
     end
 

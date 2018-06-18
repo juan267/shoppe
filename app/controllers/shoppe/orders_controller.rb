@@ -4,6 +4,7 @@ module Shoppe
     before_filter { params[:id] && @order = Shoppe::Order.find(params[:id]) }
 
     def index
+      binding.pry
       @query = Shoppe::Order.ordered.received.joins(:products).includes(order_items: :ordered_item).page(params[:page]).search(params[:q])
       @orders = @query.result
       @unpaged_orders = @orders.except(:limit, :offset)

@@ -1,0 +1,10 @@
+.printSubscriptionsCSV
+  %h2= 'Exportar suscripciones CSV'
+  = search_form_for @query, :url => subscriptions_path(format: :csv), :html => { :method => :get } do |f|
+    %dl.left
+      %dt= f.label :updated_at_eq, "Desde"
+      %dd= f.datetime_local_field :updated_at_gteq
+    %dl.right
+      %dt= f.label :updated_at_eq, "Hasta"
+      %dd= f.datetime_local_field :updated_at_lteq
+      %dd= submit_tag 'Exportar', class: 'button green button'

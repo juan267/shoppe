@@ -1,0 +1,45 @@
+- @page_title = t('shoppe.subscriptions.subscriptions')
+
+= content_for :header do
+  %p.buttons
+    = link_to 'Exportar reporte de suscripciones(CSV)', '#', :class => 'button', :rel => 'printSubscriptionsCSV'
+    = link_to t('shoppe.subscriptions.search_subscriptions'), '#', :class => 'button', :rel => 'searchSubscriptions'
+  %h2.orders Suscripciones
+
+= render 'search_form'
+= render 'subscriptions_date_form'
+
+.table
+  %table.data
+    %thead
+      %tr
+        %th= t('shoppe.subscriptions.number')
+        %th= t('shoppe.subscriptions.client')
+        %th= t('shoppe.subscriptions.subscription_items')
+        %th= t('shoppe.subscriptions.periodicity')
+        %th= t('shoppe.subscriptions.value')
+        %th= t('shoppe.subscriptions.status')
+        %th= t('shoppe.subscriptions.actions')
+    %tbody
+      - if @subscriptions.empty?
+        %tr.empty
+          %td{:colspan => 7}= t('shoppe.subscriptions.no_subscriptions')
+      - else
+        - for subscription in @subscriptions
+          %tr
+            %td= link_to subscription.id, subscription
+            %td= "#{subscription.user.first_name} #{subscription.user.last_name}"
+            %td
+              %ul
+                - for item in subscription.subscription_items
+                  %li #{item.quantity} x #{item.product.name}
+            %td=  I18n.t :"periodicity.#{subscription.periodicity}"
+            %td= number_to_currency(subscription.price, unit: "$", precision: 1)
+            %td=  I18n.t :"status.#{subscription.status}"
+            %td
+              %ul
+              -if subscription.status == "active"
+                %p=link_to "Suspender", subscription_path(subscription, "subscription[status]" => :suspended), class:"button purple", method: :patch, data: { confirm: '¿Deseas suspender la suscripción?' }
+              - elsif subscription.status == "suspended"
+                %p=link_to "Activar", subscription_path(subscription, "subscription[status]" => :active), class:"button green", method: :patch, data: { confirm: '¿Deseas activar la suscripción?' }
+= paginate @subscriptions

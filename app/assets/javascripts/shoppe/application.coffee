@@ -15,9 +15,17 @@ $ ->
     $('div.printOrdersCSV').hide()
     $('div.orderSearch').show()
 
+  $('a[rel=searchSubscriptions]').on 'click', ->
+    $('div.printSubscriptionsCSV').hide()
+    $('div.subscriptionSearch').show()
+
   $('a[rel=printOrdersCSV]').on 'click', ->
     $('div.orderSearch').hide()
     $('div.printOrdersCSV').show()
+
+  $('a[rel=printSubscriptionsCSV]').on 'click', ->
+    $('div.subscriptionSearch').hide()
+    $('div.printSubscriptionsCSV').show()
 
   # When clicking the print customers, toggle the form
   $('a[rel=printCustomersCSV]').on 'click', ->
@@ -145,4 +153,3 @@ Mousetrap.stopCallback = -> false
 Mousetrap.bind 'escape', ->
   Nifty.Dialog.closeTopDialog()
   false
-

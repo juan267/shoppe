@@ -28,7 +28,7 @@
         - for subscription in @subscriptions
           %tr
             %td= link_to subscription.id, subscription
-            %td= "#{subscription.user.first_name} #{subscription.user.last_name}"
+            %td= link_to "#{subscription.user.first_name} #{subscription.user.last_name}", customer_path(subscription.user)
             %td
               %ul
                 - for item in subscription.subscription_items

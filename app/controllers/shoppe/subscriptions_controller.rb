@@ -22,7 +22,7 @@ module Shoppe
       if @subscription.update(subscription_params)
         flash[:notice]= "La suscripción ##{@subscription.id} suscripción fue actualizada exitosamente"
       else
-       flash[:notice]= "La suscripción ##{@subscription.id} suscripción no se pudo actualizar "
+        flash[:notice]= "La suscripción ##{@subscription.id} suscripción no se pudo actualizar "
       end
       redirect_to subscriptions_path
     end

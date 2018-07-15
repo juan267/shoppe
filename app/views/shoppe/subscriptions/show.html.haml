@@ -1,0 +1,48 @@
+- @page_title = "#{t('shoppe.subscriptions.subscription')} ##{@subscription.id}"
+= content_for :header do
+  %p.buttons
+    = link_to t('shoppe.subscriptions.back_to_subscriptions'), :subscriptions, :class => 'button grey'
+  %h2.orders= t('shoppe.subscriptions.subscription_no_html', order_number: @subscription.id)
+
+#customer
+  .details
+    .left
+      %dl
+        %dt= t('shoppe.subscriptions.client')
+        %dd= "#{@user.first_name} #{@user.last_name}"
+
+        %dt= t('shoppe.subscriptions.email')
+        %dd= mail_to @user.email
+        %dt= t('shoppe.subscriptions.phone')
+        %dd= @user.phone_number
+    .right
+      %dl
+        %dt= t('shoppe.subscriptions.billing_address')
+        %dd= @user.billing_address1
+        %dt= t('shoppe.subscriptions.city')
+        %dd= @user.billing_address3
+        %dt= t('shoppe.subscriptions.state')
+        %dd= @user.billing_address4
+
+.subscription_items
+  .table
+    %table.data
+      %thead
+        %tr
+          %th.qty= t('shoppe.subscriptions.quantity')
+          %th= t('shoppe.subscriptions.subscription_items')
+          %th= t('shoppe.subscriptions.sku')
+          %th.money= t('shoppe.subscriptions.price')
+      %tbody
+        - for item in @subscription.subscription_items
+          %tr
+            %td.qty= item.quantity
+            %td.product= item.product.name
+            %td.sku= item.product.sku
+            %td.money= number_to_currency( item.product.price, unit: "COP", precision: 1)
+      %tfoot
+        %tr
+          %td.money=  "Cantidad total: #{@subscription.subscription_items.map(&:quantity).sum}"
+          %td{:colspan => 2}
+            %dd= "Próxima fecha de cargo: #{@subscription.next_charge_at.strftime("%B %-d, %Y")}"
+          %td.money= "Valor total: #{number_to_currency(@subscription.price, unit: "COP", precision: 1)}"

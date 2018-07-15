@@ -326,6 +326,38 @@ es:
         no_file: No ha seleccionado ningún archivo para importar
         unknown_format: "Formato de archivo desconocido: %{filename}"
 
+    subscriptions:
+      actions: Acciones
+      back_to_subscriptions: Volver al listado de suscripciones
+      billing_address: Dirección de envío
+      city: Ciudad
+      client: Cliente
+      cost: Costo
+      email: Correo electrónico
+      name: Nombre
+      next_charge_at: Próxima fecha de cargo
+      no_subscriptions: No hay Suscripciones para mostrar.
+      number: Número
+      periodicity: Periodicidad
+      phone: Teléfono
+      price: Precio
+      quantity: Cantidad
+      search: Buscar
+      search_subscriptions: Buscar suscripciones
+      sku: SKU
+      state: Departamento
+      status: Estado
+      sub_total: Subtotal
+      subscription_items: Productos de la suscripción
+      subscription_no_html: "Suscripción <b>#%{order_number}</b>"
+      subscriptions: Suscripciones
+      subscription: Suscripción
+      value: Valor
+
+      statuses:
+        accepted: Aceptado
+        suspended: Suspendido
+
     orders:
       accept: Aceptar
       accept_notice: Pedido aceptado correctamente
@@ -724,6 +756,7 @@ es:
       admin_primary:
         customers: Clientes
         orders: Pedidos
+        subscriptions: Suscripciones
         products: Productos
         product_categories: Categorías de producto
         delivery_services: Servicios de envío

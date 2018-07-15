@@ -39,6 +39,12 @@ Shoppe::Engine.routes.draw do
       match :refund, on: :member, via: [:get, :post]
     end
   end
+  resources :subscriptions do
+    collection do
+      get :print_index_list
+      post :search
+    end
+  end
   resources :stock_level_adjustments, only: [:index, :create]
   resources :delivery_services do
     resources :delivery_service_prices

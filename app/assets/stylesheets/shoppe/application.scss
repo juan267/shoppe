@@ -334,9 +334,10 @@ header.main {
 	//
 	// order & customer summary pages
 	//
-	#order, #customer {
+	#order, #customer{
 		.details {
 			overflow:hidden;
+      padding: 10px;
 			.left {
 				width:55%;
 				float:left
@@ -455,7 +456,7 @@ header.main {
 	//
 	// order search
 	//
-  div.orderSearch{
+  div.orderSearch, div.subscriptionSearch{
     .search-container{
       padding: 10px;
       border-bottom: 1px solid rgb(203, 203, 203);
@@ -484,7 +485,7 @@ header.main {
       margin: 10px;
     }
   }
-	div.orderSearch, div.customerSearch, div.printCustomers, div.printCustomersCSV, div.printOrdersCSV {
+	div.orderSearch, div.subscriptionSearch, div.customerSearch, div.printCustomers, div.printCustomersCSV, div.printOrdersCSV, div.printSubscriptionsCSV  {
 		overflow:hidden;
 		display:none;
 		dl.left, dl.right {

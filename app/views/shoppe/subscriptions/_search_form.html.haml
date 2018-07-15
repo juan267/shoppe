@@ -1,0 +1,13 @@
+.subscriptionSearch{:style => action_name == 'search' ? "display:block" : ''}
+  = search_form_for @query, :url => search_subscriptions_path, :html => { :method => :post } do |f|
+    %dl.left
+      %dt= f.label :id_eq, t('shoppe.subscriptions.number')
+      %dd= f.text_field :id_eq
+      %dt= f.label :subscription_items_product_name_eq, t('shoppe.subscriptions.subscription_items')
+      %dd= f.select :subscription_items_product_name_eq, [nil] + Shoppe::Product.joins(:translations).pluck('shoppe_product_translations.name')
+    %dl.right
+      %dt= f.label :user_first_name_or_user_last_name_cont, t('shoppe.subscriptions.client')
+      %dd= f.text_field :user_first_name_or_user_last_name_cont
+      %dt= f.label :user_email_cont, t('shoppe.subscriptions.email')
+      %dd= f.text_field :user_email_cont
+    %dd.submit= f.submit  t('shoppe.subscriptions.search'), :class => 'button green button'

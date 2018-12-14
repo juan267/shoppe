@@ -5,7 +5,7 @@ module Shoppe
 
     def index
       @query = Shoppe::Order.ordered.received.joins(:products).includes(order_items: :ordered_item).page(params[:page]).search(params[:q])
-      @orders = @query.result
+      @orders = @query.result.uniq
       @unpaged_orders = @orders.except(:limit, :offset)
       respond_to do |format|
         format.html {render 'index'}
